@@ -1,0 +1,16 @@
+.error-message {
+  color: #ff0000;
+  font-size: 24px;
+}
+.admin-table {
+  width: 100%;
+}
+.search-input {
+  width: 100%;
+}
+.admin-container {
+  width: 100%;
+}
+.cell{
+  text-align: center ;
+}

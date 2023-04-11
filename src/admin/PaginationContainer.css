@@ -1,0 +1,11 @@
+.delete-button {
+  margin-right: 60px;
+}
+.pagination-container {
+  margin-top: 10px;
+  display: flex !important;
+  justify-content: space-between;
+}
+.current-button{
+  background-color: darkslategrey;
+}

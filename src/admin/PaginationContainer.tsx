@@ -19,7 +19,7 @@ const PaginationContainer = ({
   const [startFrom, setStartFrom] = useState(0)
   useEffect(() => {
     const currentPages = startFrom + 10
-    if (currentPages <= allUsers.length) {  
+    if (currentPages <= allUsers.length) {
       setUsers(allUsers.slice(startFrom, startFrom + 10))
     }
   }, [startFrom, totalSize])
@@ -63,19 +63,19 @@ const PaginationContainer = ({
           {'<'}
         </button>
         {Array.from({ length: totalPages }).map((_, index) => {
-          console.log(index*10 === startFrom,index,startFrom)
-          return <button
-            key={index}
-            className={index*10 === startFrom?"current-button":"button"}
-            onClick={() => {
-
-              console.log({startFrom})
-              setStartFrom(index * 10)
-            }}
-          >
-            {index + 1}
-          </button>
-})}
+          console.log(index * 10 === startFrom, index, startFrom)
+          return (
+            <button
+              key={index}
+              className={index * 10 === startFrom ? 'current-button' : 'button'}
+              onClick={() => {
+                setStartFrom(index * 10)
+              }}
+            >
+              {index + 1}
+            </button>
+          )
+        })}
         <button
           className="button"
           disabled={startFrom + 10 >= totalSize}

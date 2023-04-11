@@ -12,7 +12,7 @@ interface TableRowProps {
   setCheckAll(input: boolean): void
   handleDelete: (user: User) => void
   isDeletePressed: boolean
-  handleEdit: (user: User, properyName: UserProperties, value: string) => void
+  handleEdit: (user: User, propertyName: UserProperties, value: string) => void
 }
 const TableRow = ({
   currentUser,
@@ -29,52 +29,49 @@ const TableRow = ({
     setEditMode(!editMode)
   }
   return (
-    <tr key={currentUser.id} className={isChecked?"checked-row":'un-checked'}>
+    <tr
+      key={currentUser.id}
+      className={isChecked ? 'checked-row' : 'un-checked'}
+    >
       <td className="cell">
         <CheckComponent
-        checkAll={checkAll}
+          checkAll={checkAll}
           setIsChecked={setIsChecked}
           setCheckAll={setCheckAll}
           currentUser={currentUser}
-          handledelete={handleDelete}
+          handleDelete={handleDelete}
           isDeletePressed={isDeletePressed}
         />
       </td>
       <td className="cell">
         {editMode ? (
-          <>
-            <InputComponent
-              currentUser={currentUser}
-              handleEdit={handleEdit}
-              properyName={UserProperties.NAME}
-            />
-          </>
+          <InputComponent
+            currentUser={currentUser}
+            handleEdit={handleEdit}
+            propertyName={UserProperties.NAME}
+          />
         ) : (
           currentUser.name
         )}
       </td>
       <td className="cell">
         {editMode ? (
-          <>
-            <InputComponent
-              currentUser={currentUser}
-              handleEdit={handleEdit}
-              properyName={UserProperties.EMAIL}
-            />
-          </>
+          <InputComponent
+            currentUser={currentUser}
+            handleEdit={handleEdit}
+            propertyName={UserProperties.EMAIL}
+          />
         ) : (
           currentUser.email
         )}
       </td>
       <td className="cell">
         {editMode ? (
-          <>
-            <InputComponent
-              currentUser={currentUser}
-              handleEdit={handleEdit}
-              properyName={UserProperties.ROLE}
-            />
-          </>
+          <InputComponent
+            currentUser={currentUser}
+            handleEdit={handleEdit}
+            propertyName={UserProperties.ROLE}
+          />
         ) : (
           currentUser.role
         )}
@@ -85,7 +82,7 @@ const TableRow = ({
           onClick={() => handleEditMode()}
           width={44}
           height={44}
-          alt="delte"
+          alt="edit button"
         />
 
         <img
@@ -93,10 +90,10 @@ const TableRow = ({
           onClick={() => handleDelete(currentUser)}
           width={44}
           height={44}
-          alt="delte"
+          alt="delete button"
         />
       </td>
     </tr>
   )
 }
-export default TableRow;
+export default TableRow

@@ -3,40 +3,39 @@ import { User } from '../AdminPanel'
 interface CheckComponentProps {
   currentUser: User
   isDeletePressed: boolean
-  handledelete(users: User): void
+  handleDelete(users: User): void
   setCheckAll(checkAll: boolean): void
   checkAll: boolean
   setIsChecked(input: boolean): void
 }
 const CheckComponent = ({
   isDeletePressed,
-  handledelete,
+  handleDelete,
   checkAll,
   currentUser,
   setCheckAll,
   setIsChecked,
 }: CheckComponentProps) => {
-  const [check, setCheck] = useState(checkAll)
+  const [isChecked, setIsCheckedState] = useState(checkAll)
   useEffect(() => {
-    if (check) {
-      handledelete(currentUser)
+    if (isChecked) {
+      handleDelete(currentUser)
       setCheckAll(false)
     }
   }, [isDeletePressed])
   useEffect(() => {
-    setCheck(checkAll)
+    setIsCheckedState(checkAll)
     setIsChecked(checkAll)
   }, [checkAll])
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newCheckedState = e.target.checked
+    setIsCheckedState(newCheckedState)
+    setIsChecked(newCheckedState)
+  }
   return (
     <>
-      <input
-        type="checkbox"
-        checked={check}
-        onChange={(e) => {
-          setCheck(e.target.checked)
-          setIsChecked(e.target.checked)
-        }}
-      />
+      <input type="checkbox" checked={isChecked} onChange={handleChange} />
     </>
   )
 }

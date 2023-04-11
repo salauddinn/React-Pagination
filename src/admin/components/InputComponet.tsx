@@ -1,21 +1,25 @@
-import { User, UserProperties } from "../AdminPanel";
+import { User, UserProperties } from '../AdminPanel'
 
 interface InputComponentProps {
-    currentUser: User,
-    properyName: UserProperties,
-    handleEdit(user: User, properyName: UserProperties,value:string): void;
-
+  currentUser: User
+  propertyName: UserProperties
+  handleEdit(user: User, propertyName: UserProperties, value: string): void
 }
 
-
-const InputComponent = ({ currentUser, properyName ,handleEdit}: InputComponentProps) => {
-
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        handleEdit(currentUser, properyName,e.target.value )
-     
-    }
-    return <input type="text" value={currentUser[properyName]} onChange={(e) => handleOnChange(e)}></input>;
-
-
+const InputComponent = ({
+  currentUser,
+  propertyName,
+  handleEdit,
+}: InputComponentProps) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleEdit(currentUser, propertyName, e.target.value)
+  }
+  return (
+    <input
+      type="text"
+      value={currentUser[propertyName]}
+      onChange={(e) => handleOnChange(e)}
+    ></input>
+  )
 }
-export default InputComponent;
+export default InputComponent

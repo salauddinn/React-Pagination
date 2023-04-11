@@ -6,7 +6,7 @@ interface TableContainerProps {
   users: User[]
   isDeletePressed: boolean
   handleDelete(user: User): void
-  handleEdit(user: User, properyName: UserProperties, value: string): void
+  handleEdit(user: User, propertyName: UserProperties, value: string): void
 }
 const TableContainer = ({
   users,
@@ -14,9 +14,11 @@ const TableContainer = ({
   handleDelete,
   handleEdit,
 }: TableContainerProps) => {
-  
   const [checkAll, setCheckAll] = useState(false)
 
+  const handleCheckAllChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckAll(e.target.checked)
+  }
   return (
     <>
       {' '}
@@ -27,9 +29,7 @@ const TableContainer = ({
               <input
                 type="checkbox"
                 checked={checkAll}
-                onChange={(e) => {
-                  setCheckAll(e.target.checked)
-                }}
+                onChange={handleCheckAllChange}
               />
             </th>
             <th className="cell">Name</th>
@@ -41,13 +41,13 @@ const TableContainer = ({
         <tbody>
           {users.map((currentUser) => (
             <TableRow
-            key={currentUser.id}
-            currentUser={currentUser}
-            checkAll={checkAll}
-            setCheckAll={setCheckAll}
-            handleDelete={handleDelete}
-            isDeletePressed={isDeletePressed}
-            handleEdit={handleEdit}
+              key={currentUser.id}
+              currentUser={currentUser}
+              checkAll={checkAll}
+              setCheckAll={setCheckAll}
+              handleDelete={handleDelete}
+              isDeletePressed={isDeletePressed}
+              handleEdit={handleEdit}
             />
           ))}
         </tbody>

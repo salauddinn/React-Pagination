@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './AdminPanel.css'
 import PaginationContainer from './PaginationContainer'
 import Spinner from './components/Spinner'
@@ -45,7 +45,7 @@ function AdminPanel() {
       setLoading(false)
     }
   }
-  const handleDelete = (currentUser: User) => {
+  const handleDelete = useCallback((currentUser: User) => {
     setUsers((prevUsers) =>
       prevUsers.filter((user) => user.id !== currentUser.id),
     )
@@ -58,33 +58,13 @@ function AdminPanel() {
         prevSearchUsers.filter((user) => user.id !== currentUser.id),
       )
     }
-    if (isDeletePressed) setIsDeletePressed(false)
-  }
-  const handleEdit = (
-    currentUser: User,
-    properyName: UserProperties,
-    value: string,
-  ) => {
-    currentUser[properyName] = value
+    setIsDeletePressed(false)
+  }, [])
+  const handleEdit = useCallback(
+    (currentUser: User, propertyName: UserProperties, value: string) => {
+      currentUser[propertyName] = value
 
-    setUsers((prevUsers) =>
-      prevUsers.map((user) => {
-        if (user.id === currentUser.id) {
-          return currentUser
-        }
-        return user
-      }),
-    )
-    setAllusers((prevUsers) =>
-      prevUsers.map((user) => {
-        if (user.id === currentUser.id) {
-          return currentUser
-        }
-        return user
-      }),
-    )
-    if (searchMode) {
-      setSearchUsers((prevUsers) =>
+      setUsers((prevUsers) =>
         prevUsers.map((user) => {
           if (user.id === currentUser.id) {
             return currentUser
@@ -92,8 +72,27 @@ function AdminPanel() {
           return user
         }),
       )
-    }
-  }
+      setAllusers((prevUsers) =>
+        prevUsers.map((user) => {
+          if (user.id === currentUser.id) {
+            return currentUser
+          }
+          return user
+        }),
+      )
+      if (searchMode) {
+        setSearchUsers((prevUsers) =>
+          prevUsers.map((user) => {
+            if (user.id === currentUser.id) {
+              return currentUser
+            }
+            return user
+          }),
+        )
+      }
+    },
+    [],
+  )
 
   if (loading) {
     return <Spinner></Spinner>
